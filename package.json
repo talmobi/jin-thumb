@@ -1,8 +1,12 @@
 {
   "name": "buffclouds_thumbnails",
   "version": "0.0.0",
+  "description": "A small npm module that create thumnails of websites with node-webshot",
   "private": true,
-  "scripts": {},
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "parseuri": "0.0.4",
     "webshot": "^0.15.3"

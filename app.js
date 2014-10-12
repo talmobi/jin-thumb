@@ -132,11 +132,6 @@ function getSiteThumbnail(url, callback) {
           console.log("Defaulting to screenshot.");
 
           respond(url, callback);
-          /*webshot(url,  (new Date().getTime()) + '.jpg', options, function(err) {
-            if (err) {
-              console.log(err);
-            }
-          });*/
         }
       })
 
