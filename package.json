@@ -1,0 +1,11 @@
+{
+  "name": "buffclouds_thumbnails",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "parseuri": "0.0.4",
+    "webshot": "^0.15.3"
+  },
+  "devDependencies": {}
+}
