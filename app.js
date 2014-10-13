@@ -11,7 +11,7 @@ var defaultOptions = {
   }
 , zoomFactor: .25
 , quality: 75
-, timeout: 20000
+, timeout: 60000
 , settings: {
   javascriptEnabled: false
 }
