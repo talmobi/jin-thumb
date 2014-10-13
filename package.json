@@ -1,5 +1,5 @@
 {
-  "name": "buffclouds_thumbnails",
+  "name": "jin-thumb",
   "version": "0.1.0",
   "description": "A small npm module that create thumnails of websites with node-webshot",
   "private": true,
