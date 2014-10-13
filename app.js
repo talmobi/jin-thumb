@@ -39,6 +39,7 @@ function respond(url, options, callback) {
       console.log("in reponde ln 37");
 
       if (err) {
+        console.log("in reponde ln 42");
         console.log(err);
         callback(err);
         return;
@@ -47,11 +48,13 @@ function respond(url, options, callback) {
       var buf = "";
 
       renderStream.on('data', function(data) {
-        //console.log("Writing data.");
+        console.log("Writing data. reponde ln 51");
         buf += (data.toString('binary'));
       });
 
       renderStream.on('end', function() {
+        console.log("Writing DONE. reponde ln 56");
+
         //console.log("Image Done!");
         if (callback) {
           callback(null, buf);
