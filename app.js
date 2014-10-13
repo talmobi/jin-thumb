@@ -24,7 +24,7 @@ var settings = {
 
 function respond(url, options, callback) {
   console.log("in reponde ln 26");
-  
+
   if (settings.saveToFile) {
     webshot(url,  (settings.name || (new Date().getTime())) + '.jpg', options, function(err) {
       if (err) {
@@ -56,6 +56,10 @@ function respond(url, options, callback) {
         if (callback) {
           callback(null, buf);
         }
+      });
+
+      renderStream.on('error', function() {
+        console.log("error in responde ln 62");
       });
     });
   }
