@@ -9,18 +9,18 @@ A module to create small thumbnails out of site urls.
 
 ## Usage
 
-  var jthumb = require('jin-thumb');
+    var jthumb = require('jin-thumb');
 
-  var url = "http://google.com";
+    var url = "http://google.com";
 
-  jthumb.getSiteThumbnail(url, function(err, data) {
-    if (err) {
-      console.log(err);
-      return;
-    }
+    jthumb.getSiteThumbnail(url, function(err, data) {
+      if (err) {
+        console.log(err);
+        return;
+      }
 
-    var img = '<img src="' + data + '">';
-  });
+      var img = '<img src="' + data + '">';
+    });
 
 
 ## Release History
