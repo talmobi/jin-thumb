@@ -21,42 +21,14 @@ var options = {
 }
 }
 
-/*
-webshot('google.com', 'google.jpg', options, function(err) {
-  if (err) {
-    console.log(err);
-  }
-});
-webshot('mangahead.com', 'mangahead.jpg', options, function(err) {
-  if (err) {
-    console.log(err);
-  }
-});
-webshot('iltasanomat.fi', 'iltasanomat.jpg', options, function(err) {
-  if (err) {
-    console.log(err);
-  }
-});
-webshot('slashdot.org', 'slashdot.jpg', options, function(err) {
-  if (err) {
-    console.log(err);
-  }
-});
-webshot('https://www.youtube.com/watch?v=kKTRXhfwU5k', 'youtube.jpg', options, function(err) {
-  if (err) {
-    console.log(err);
-  }
-});
-*/
-
-var opts = {
+var settings = {
   saveToFile: false,
   name: null
 }
 
-function respond(url, callback) {
-  if (opts.saveToFile) {
-    webshot(url,  (opts.name || (new Date().getTime())) + '.jpg', options, function(err) {
+function respond(url, options, callback) {
+  if (settings.saveToFile) {
+    webshot(url,  (settings.name || (new Date().getTime())) + '.jpg', options, function(err) {
       if (err) {
         console.log(err);
       }
@@ -73,19 +45,15 @@ function respond(url, callback) {
       var buf = "";
 
       renderStream.on('data', function(data) {
-        console.log("Writing data.");
+        //console.log("Writing data.");
         buf += (data.toString('binary'));
       });
 
       renderStream.on('end', function() {
-        console.log("Image Done!");
+        //console.log("Image Done!");
         if (callback) {
           callback(null, buf);
         }
-        console.log("binary length: " + Buffer.byteLength(buf, 'binary'));
-        console.log("ascii length: " + Buffer.byteLength(buf, 'ascii'));
-        console.log("string length: " + buf.length);
-        console.log("base64 length: " + Buffer.byteLength(buf, 'base64'));
       });
     });
   }
@@ -93,7 +61,8 @@ function respond(url, callback) {
 
 function getSiteThumbnail(url, callback) {
   if (typeof url !== 'string') {
-    console.log("Invalid URL");
+    //console.log("Invalid URL");
+    callback({text: "Invalid URL!"}, null);
     return;
   }
 
@@ -119,32 +88,40 @@ function getSiteThumbnail(url, callback) {
         var arr = youtubeThumbnailRegex.exec(str);
 
         if (arr) {
-          console.log(arr.index);
-          console.log(arr[1]);
+          //console.log(arr.index);
+          //console.log(arr[1]);
           var tbUrl = arr[1];
 
+          // copy options
           var opts = JSON.parse(JSON.stringify(options));
           opts.zoomFactor = 1;
 
-          respond(tbUrl, callback);
+          respond(tbUrl, opts, callback);
         } else {
           // we failed, return to default behaviour.
-          console.log("Defaulting to screenshot.");
+          //console.log("Defaulting to screenshot.");
 
-          respond(url, callback);
+          respond(url, options, callback);
         }
       })
 
     }).end();
   } else {
-    respond(url, callback);
+    respond(url, options, callback);
   }    
 }
 
 //var u = 'https://www.youtube.com/watch?v=aK1S59Jbpiw';
-var u = 'http://slashdot.org';
+//var u = 'http://slashdot.org';
 // u = 'https://www.youtube.com/';
 
-var s = parseUri( u );
+//var s = parseUri( u );
 
-getSiteThumbnail(u);
+//getSiteThumbnail(u);
+
+
+module.exports = {
+  getSiteThumbnail: function(url, callback) {
+    return getSiteThumbnail(url, callback);
+  }
+};

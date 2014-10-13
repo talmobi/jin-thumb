@@ -1,15 +1,32 @@
 {
   "name": "buffclouds_thumbnails",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A small npm module that create thumnails of websites with node-webshot",
   "private": true,
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hannyajin/jin-thumb.git"
+  },
+  "keywords": [
+    "thumbnail",
+    "screenshot",
+    "website",
+    "webthumbnail"
+  ],
+  "author": "hannyajin",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/hannyajin/jin-thumb/issues"
   },
   "dependencies": {
     "parseuri": "0.0.4",
     "webshot": "^0.15.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^1.21.5"
+  }
 }
