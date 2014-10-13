@@ -13,16 +13,22 @@ A module to create small thumbnails out of site urls.
 
     var url = "http://google.com";
 
-    jthumb.getSiteThumbnail(url, function(err, data) {
+    jthumb.get(url, function(err, data) {
       if (err) {
         console.log(err);
         return;
       }
 
+      // e.g.
       var img = '<img src="' + data + '">';
+
+      // assuming a node response object
+      ...
+      res.end(data, 'binary');
     });
 
 
 ## Release History
 
-* 0.1.0 Initial release
+* 0.1.1 release
+  Added 'get' method shortcut for getSiteThumbnail

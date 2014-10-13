@@ -4,14 +4,10 @@ var http = require('http');
 
 var youtubeThumbnailRegex = /\"thumbnailUrl\"\s*href=["'](.*)["']/im;
 
-var options = {
+var defaultOptions = {
   screenSize: {
     width: 192
   , height: 108
-  }
-, paperSize: {
-  width: '100px'
-, height: '100px'
   }
 , zoomFactor: .25
 , quality: 75
@@ -35,7 +31,7 @@ function respond(url, options, callback) {
     });
   } else {
     // callback with binary
-    webshot(url, function(err, renderStream) {
+    webshot(url, options, function(err, renderStream) {
       if (err) {
         console.log(err);
         callback(err);
@@ -93,7 +89,7 @@ function getSiteThumbnail(url, callback) {
           var tbUrl = arr[1];
 
           // copy options
-          var opts = JSON.parse(JSON.stringify(options));
+          var opts = JSON.parse(JSON.stringify(defaultOptions));
           opts.zoomFactor = 1;
 
           respond(tbUrl, opts, callback);
@@ -101,13 +97,13 @@ function getSiteThumbnail(url, callback) {
           // we failed, return to default behaviour.
           //console.log("Defaulting to screenshot.");
 
-          respond(url, options, callback);
+          respond(url, defaultOptions, callback);
         }
       })
 
     }).end();
   } else {
-    respond(url, options, callback);
+    respond(url, defaultOptions, callback);
   }    
 }
 
@@ -123,5 +119,6 @@ function getSiteThumbnail(url, callback) {
 module.exports = {
   getSiteThumbnail: function(url, callback) {
     return getSiteThumbnail(url, callback);
-  }
+  },
+  get: getSiteThumbnail
 };
