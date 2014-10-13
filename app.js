@@ -23,7 +23,6 @@ var settings = {
 }
 
 function respond(url, options, callback) {
-  console.log("in reponde ln 26");
 
   if (settings.saveToFile) {
     webshot(url,  (settings.name || (new Date().getTime())) + '.jpg', options, function(err) {
@@ -32,14 +31,11 @@ function respond(url, options, callback) {
       }
     });
   } else {
-    console.log("in reponde ln 33");
 
     // callback with binary
     webshot(url, options, function(err, renderStream) {
-      console.log("in reponde ln 37");
 
       if (err) {
-        console.log("in reponde ln 42");
         console.log(err);
         callback(err);
         return;
@@ -48,12 +44,10 @@ function respond(url, options, callback) {
       var buf = "";
 
       renderStream.on('data', function(data) {
-        console.log("Writing data. reponde ln 51");
         buf += (data.toString('binary'));
       });
 
       renderStream.on('end', function() {
-        console.log("Writing DONE. reponde ln 56");
 
         //console.log("Image Done!");
         if (callback) {
@@ -62,7 +56,6 @@ function respond(url, options, callback) {
       });
 
       renderStream.on('error', function() {
-        console.log("error in responde ln 62");
       });
     });
   }
