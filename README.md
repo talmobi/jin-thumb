@@ -32,3 +32,5 @@ A module to create small thumbnails out of site urls.
 
 * 0.1.1 release
   Added 'get' method shortcut for getSiteThumbnail
+
+* 0.1.0 Initial release
