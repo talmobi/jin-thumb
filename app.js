@@ -23,6 +23,8 @@ var settings = {
 }
 
 function respond(url, options, callback) {
+  console.log("in reponde ln 26");
+  
   if (settings.saveToFile) {
     webshot(url,  (settings.name || (new Date().getTime())) + '.jpg', options, function(err) {
       if (err) {
@@ -30,8 +32,12 @@ function respond(url, options, callback) {
       }
     });
   } else {
+    console.log("in reponde ln 33");
+
     // callback with binary
     webshot(url, options, function(err, renderStream) {
+      console.log("in reponde ln 37");
+
       if (err) {
         console.log(err);
         callback(err);
